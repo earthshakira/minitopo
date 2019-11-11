@@ -28,7 +28,7 @@ class MpParamXp(MpParam):
 	QUICMULTIPATH = "quicMultipath"
 	QUICREQRESRUNTIME = "quicReqresRunTime"
 	BUFFERAUTOTUNING = "bufferAutotuning"
-	OUTPUTFILE = "outputFile"
+	OUTPUTPATH = "outputPath"
 
 	# global sysctl
 	sysctlKey = {}

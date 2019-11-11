@@ -24,7 +24,7 @@ class MpExperience:
 		self.write_analytics()
 
 	def write_analytics(self):
-		f = open(self.xpParam.getParam('outputFile'),"w")
+		f = open(self.xpParam.getParam('outputPath'),"w")
 		f.write(json.dumps(self.analytics))
 		f.close()
 
