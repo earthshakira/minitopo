@@ -20,7 +20,7 @@ class MpExperience:
 
 	def stop_time(self):
 		self.analytics["timer"]["end_time"] = time.time()
-		self.analytics["timer"]["duration"] = self.analytics["timer"]["end_time"] - self.analytics["timer"]["start_time"] = time.time()
+		self.analytics["timer"]["duration"] = self.analytics["timer"]["end_time"] - self.analytics["timer"]["start_time"]
 		self.write_analytics()
 
 	def write_analytics(self):

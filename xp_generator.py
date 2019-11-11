@@ -41,7 +41,7 @@ for _ in range(number_of_xp):
 						xp_file = xp_template.format(additional=additional,filesize=file_size,type=sch,cc=cc,output=file_path)
 						dump_to_file("exp.topo",topo_file)
 						dump_to_file("exp.xp",xp_file)
-						rc = call("sudo /home/mininet/git/minitopo/src/mpPerf.py -x exp.xp -t exp.topo", shell=True)
+						rc = call("sudo src/mpPerf.py -x exp.xp -t exp.topo >> /dev/null", shell=True)
 						print(file_path,rc)
 
 				
