@@ -45,8 +45,8 @@ for _ in range(number_of_xp):
 				f = open(file_path)
 				data = json.loads(f.read())
 				f.close()
-				dura = int(data['timer']['duration'])
-				print(sch,cc,file_size,dura, (int(file_size)/dura/128) * 1.04858)
+				dura = data['timer']['duration']
+				print(sch,cc,file_size,dura,band_width,(int(file_size)/dura/128) * 1.04858)
 				print(file_path,rc)
 
 				
