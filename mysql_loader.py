@@ -13,7 +13,11 @@ def get_bw_and_delay(a):
 	return float(a[2]),float(a[0])
 
 for exp_file in files.split():
-	data = json.loads(open(exp_file,'r').read())
+	print(exp_file)
+	line = open(exp_file,'r').read()
+	if len(line) == 0:
+		continue
+	data = json.loads(line)
 	flat_dict = {}
 	for (_,value) in data.items():
 		for (k,v) in value.items():
@@ -55,4 +59,5 @@ for item in items:
 	# print(item['bw_1'],item['bw_0'],item['file_size'],item['duration'],item['goodput'],item['xpType'])
 	st = st + "('{d[xpType]}',{d[file_size]:d},{d[duration]:f},{d[loss_0]:f},{d[loss_1]:f},{d[delay_0]:f},{d[delay_1]:f},{d[bw_0]:f},{d[bw_1]:f},{d[goodput]:f},'{d[outputPath]}')\n".format(d=item)
 	st += ','
-print(st)
+
+print(st[:-1])
