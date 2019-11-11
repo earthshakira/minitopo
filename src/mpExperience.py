@@ -1,4 +1,6 @@
 from mpParamXp import MpParamXp
+import time
+import json
 
 class MpExperience:
 	NONE = "none"
@@ -10,7 +12,21 @@ class MpExperience:
 		self.xpParam  = xpParam
 		self.mpTopo   = mpTopo
 		self.mpConfig = mpConfig
+		self.analytics={"xp":xpParam.paramDic,"topo":mpTopo.topoParam.paramDic,"timer":{}}
 		print(self.xpParam)
+
+	def start_time(self):
+		self.analytics["timer"]["start_time"] = time.time()
+
+	def stop_time(self):
+		self.analytics["timer"]["end_time"] = time.time()
+		self.analytics["timer"]["duration"] = self.analytics["timer"]["end_time"] - self.analytics["timer"]["start_time"] = time.time()
+		self.write_analytics()
+
+	def write_analytics(self):
+		f = open(self.xpParam.getParam('outputFile'),"w")
+		f.write(json.dumps(self.analytics))
+		f.close()
 
 	def classicRun(self):
 		self.prepare()

@@ -99,9 +99,10 @@ class MpExperienceQUIC(MpExperience):
 
 		cmd = self.getQUICClientPreCmd()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
-
 		cmd = self.getQUICClientCmd()
+		self.start_time()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
+		self.stop_time()
 		self.mpTopo.commandTo(self.mpConfig.server, "netstat -sn > netstat_server_after")
 		self.mpTopo.commandTo(self.mpConfig.client, "netstat -sn > netstat_client_after")
 

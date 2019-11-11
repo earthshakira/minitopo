@@ -28,7 +28,7 @@ class MpParamXp(MpParam):
 	QUICMULTIPATH = "quicMultipath"
 	QUICREQRESRUNTIME = "quicReqresRunTime"
 	BUFFERAUTOTUNING = "bufferAutotuning"
-
+	OUTPUTFILE = "outputFile"
 
 	# global sysctl
 	sysctlKey = {}
@@ -68,7 +68,7 @@ class MpParamXp(MpParam):
 	defaultValue[SERVERPCAP] = "no"
 	defaultValue[SNAPLENPCAP] = "65535"  # Default snapping value of tcpdump
 	defaultValue[XPTYPE] = "none"
-	defaultValue[PINGCOUNT] = "5"
+	defaultValue[PINGCOUNT] = "1"
 	defaultValue[DDIBS] = "1k"
 	defaultValue[DDOBS] = "1k"
 	defaultValue[DDCOUNT] = "5000" #5k * 1k = 5m
