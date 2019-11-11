@@ -16,7 +16,7 @@ schemes = ['quic','https']
 losses = [0,2.5]
 band_widths = [0.1,100]
 delays = [0,150]
-file_sizes = [1024,2048,4096,8192]
+file_sizes = [1024,20480,81920]
 ccs = ['olia','cubic']
 
 number_of_xp = 30
@@ -28,21 +28,26 @@ for _ in range(number_of_xp):
 	for file_size in file_sizes:
 		for sch in schemes:
 			for cc in ccs:
-						file_path="/home/mininet/exps/{:d}/exp_{}.json".format(exp_run_time_stamp,xp_no)
-						xp_no+=1
-						loss=[uniform(losses[0],losses[1]),uniform(losses[0],losses[1])]
-						band_width=[uniform(band_widths[0],band_widths[1]),uniform(band_widths[0],band_widths[1])]
-						delay=[uniform(delays[0],delays[1]),uniform(delays[0],delays[1])]
-						additional=""
-						if sch == "quic":
-							additional="quicMultipath:{:d}\n".format(1 if cc == "olia" else 0)
+				file_path="/home/mininet/exps/{:d}/exp_{}.json".format(exp_run_time_stamp,xp_no)
+				xp_no+=1
+				loss=[uniform(losses[0],losses[1]),uniform(losses[0],losses[1])]
+				band_width=[uniform(band_widths[0],band_widths[1]),uniform(band_widths[0],band_widths[1])]
+				delay=[uniform(delays[0],delays[1]),uniform(delays[0],delays[1])]
+				additional=""
+				if sch == "quic":
+					additional="quicMultipath:{:d}\n".format(1 if cc == "olia" else 0)
 
-						topo_file = topo_template.format(loss=loss,delay=delay,bandwidth=band_width)
-						xp_file = xp_template.format(additional=additional,filesize=file_size,type=sch,cc=cc,output=file_path)
-						dump_to_file("exp.topo",topo_file)
-						dump_to_file("exp.xp",xp_file)
-						rc = call("sudo src/mpPerf.py -x exp.xp -t exp.topo >> /dev/null", shell=True)
-						print(file_path,rc)
+				topo_file = topo_template.format(loss=loss,delay=delay,bandwidth=band_width)
+				xp_file = xp_template.format(additional=additional,filesize=file_size,type=sch,cc=cc,output=file_path)
+				dump_to_file("exp.topo",topo_file)
+				dump_to_file("exp.xp",xp_file)
+				rc = call("sudo src/mpPerf.py -x exp.xp -t exp.topo >> /dev/null", shell=True)
+				f = open(file_path)
+				data = json.loads(f.read())
+				f.close()
+				dura = int(data['timer']['duration'])
+				print(sch,cc,file_size,dura, (int(file_size)/dura/128) * 1.04858)
+				print(file_path,rc)
 
 				
 				
