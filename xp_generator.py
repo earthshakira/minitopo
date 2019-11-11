@@ -13,10 +13,10 @@ topo_template = open("topo.template","r").read()
 xp_template = open("xp.template","r").read()
 
 schemes = ['quic','https']
-losses = [0,2.5]
+losses = [0,0.1]
 band_widths = [0.1,100]
 delays = [0,150]
-file_sizes = [1024,20480,81920]
+file_sizes = [1024,20480]
 ccs = ['olia','cubic']
 
 number_of_xp = 30
@@ -34,8 +34,13 @@ for _ in range(number_of_xp):
 				band_width=[uniform(band_widths[0],band_widths[1]),uniform(band_widths[0],band_widths[1])]
 				delay=[uniform(delays[0],delays[1]),uniform(delays[0],delays[1])]
 				additional=""
+
 				if sch == "quic":
 					additional="quicMultipath:{:d}\n".format(1 if cc == "olia" else 0)
+				elif cc == "olia":
+					call("sudo sysctl -w net.mptcp.mptpc_enabled=1", shell=True)
+				else:
+					call("sudo sysctl -w net.mptcp.mptpc_enabled=0", shell=True)
 
 				topo_file = topo_template.format(loss=loss,delay=delay,bandwidth=band_width)
 				xp_file = xp_template.format(additional=additional,filesize=file_size,type=sch,cc=cc,output=file_path)
