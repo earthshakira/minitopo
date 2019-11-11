@@ -14,10 +14,10 @@ topo_template = open("topo.template","r").read()
 xp_template = open("xp.template","r").read()
 
 schemes = ['quic','https']
-losses = [0,0.1]
+losses = [0,0]
 band_widths = [0.1,100]
 delays = [0,150]
-file_sizes = [1024,20480]
+file_sizes = [1024,20480,81920,163840]
 ccs = ['olia','cubic']
 
 number_of_xp = 30
@@ -54,6 +54,7 @@ for _ in range(number_of_xp):
 				dura = data['timer']['duration']
 				print(sch,cc,file_size,dura,band_width,(int(file_size)/dura/128) * 1.04858)
 				print(file_path,rc)
+				rc = call("sudo mn -c > /dev/null", shell=True)
 
 				
 				
