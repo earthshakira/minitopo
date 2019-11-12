@@ -14,13 +14,13 @@ topo_template = open("topo.template","r").read()
 xp_template = open("xp.template","r").read()
 
 schemes = ['quic','https']
-losses = [0,0]
+losses = [0,2.5]
 band_widths = [0.1,100]
 delays = [0,150]
 file_sizes = [1024,20480,81920,163840]
 ccs = ['olia','cubic']
 
-number_of_xp = 30
+number_of_xp = 100
 xp_no = 0
 exp_run_time_stamp = int(timeit.default_timer())
 os.mkdir("/home/mininet/exps/{:d}".format(exp_run_time_stamp))
