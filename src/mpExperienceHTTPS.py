@@ -75,7 +75,7 @@ class  MpExperienceHTTPS(MpExperience):
 		self.mpTopo.commandTo(self.mpConfig.client, "sleep 2")
 		cmd = self.getHTTPSClientCmd()
 		# self.mpTopo.commandTo(self.mpConfig.client, "netstat -sn > netstat_client_before")
-		self.mpTopo.commandTo(self.mpConfig.client, "/usr/bin/ifstat -n 5 > client.ifstat")
+		self.mpTopo.commandTo(self.mpConfig.client, "/usr/bin/ifstat -n 5 > client.ifstat &")
 		self.start_time()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
 		self.stop_time()

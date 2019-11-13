@@ -101,7 +101,7 @@ class MpExperienceQUIC(MpExperience):
 		cmd = self.getQUICClientPreCmd()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
 		cmd = self.getQUICClientCmd()
-		self.mpTopo.commandTo(self.mpConfig.client, "/usr/bin/ifstat -n 5 > client.ifstat")
+		self.mpTopo.commandTo(self.mpConfig.client, "/usr/bin/ifstat -n 5 > client.ifstat &")
 		self.start_time()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
 		self.stop_time()
