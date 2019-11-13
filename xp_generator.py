@@ -17,7 +17,7 @@ schemes = ['quic','https']
 losses = [0,2.5]
 band_widths = [0.1,100]
 delays = [0,150]
-file_sizes = [1024,20480,81920,163840]
+file_sizes = [1024000]
 ccs = ['olia','cubic']
 
 number_of_xp = 100
