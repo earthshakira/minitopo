@@ -13,7 +13,6 @@ class MpExperience:
 		self.mpTopo   = mpTopo
 		self.mpConfig = mpConfig
 		self.analytics={"xp":xpParam.paramDic,"topo":mpTopo.topoParam.paramDic,"timer":{}}
-		print(self.xpParam)
 
 	def start_time(self):
 		self.analytics["timer"]["start_time"] = time.time()
@@ -25,6 +24,11 @@ class MpExperience:
 
 	def write_analytics(self):
 		f = open(self.xpParam.getParam('outputPath'),"w")
+		
+		ifstat = open("client.ifstat",'r')
+		self.analytics['ifstat'] = ifstat.read()
+		ifstat.close()
+
 		f.write(json.dumps(self.analytics))
 		f.close()
 

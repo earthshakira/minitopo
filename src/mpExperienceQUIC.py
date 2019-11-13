@@ -86,6 +86,7 @@ class MpExperienceQUIC(MpExperience):
 		MpExperience.clean(self)
 		if self.file  == "random":
 			self.mpTopo.commandTo(self.mpConfig.client, "rm random*")
+		self.mpTopo.commandTo(self.mpConfig.client, "rm client.ifstat")
 
 	def run(self):
 		self.compileGoFiles()
@@ -100,6 +101,7 @@ class MpExperienceQUIC(MpExperience):
 		cmd = self.getQUICClientPreCmd()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
 		cmd = self.getQUICClientCmd()
+		self.mpTopo.commandTo(self.mpConfig.client, "/usr/bin/ifstat -n 5 > client.ifstat")
 		self.start_time()
 		self.mpTopo.commandTo(self.mpConfig.client, cmd)
 		self.stop_time()
@@ -107,7 +109,7 @@ class MpExperienceQUIC(MpExperience):
 		self.mpTopo.commandTo(self.mpConfig.client, "netstat -sn > netstat_client_after")
 
 		self.mpTopo.commandTo(self.mpConfig.server, "pkill -f " + MpExperienceQUIC.SERVER_GO_FILE)
-
+		self.mpTopo.commandTo(self.mpConfig.client, "pkill -f ifstat")
 		self.mpTopo.commandTo(self.mpConfig.client, "sleep 2")
 		# Need to delete the go-build directory in tmp; could lead to no more space left error
 		self.mpTopo.commandTo(self.mpConfig.client, "rm -r /tmp/go-build*")
