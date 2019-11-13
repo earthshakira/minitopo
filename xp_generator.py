@@ -15,7 +15,7 @@ xp_template = open("xp.template","r").read()
 
 schemes = ['quic','https']
 losses = [0,2.5]
-band_widths = [0.1,100]
+band_widths = [0,50]
 delays = [0,150]
 file_sizes = [1024000]
 ccs = ['olia','cubic']
@@ -27,7 +27,7 @@ os.mkdir("/home/mininet/exps/{:d}".format(exp_run_time_stamp))
 
 for _ in range(number_of_xp):
 	loss=[uniform(losses[0],losses[1]),uniform(losses[0],losses[1])]
-	band_width=[uniform(band_widths[0],band_widths[1]),uniform(band_widths[0],band_widths[1])]
+	band_width=[50 + uniform(band_widths[0],band_widths[1]),50 + uniform(band_widths[0],band_widths[1])]
 	delay=[uniform(delays[0],delays[1]),uniform(delays[0],delays[1])]
 	for file_size in file_sizes:
 		for sch in schemes:
